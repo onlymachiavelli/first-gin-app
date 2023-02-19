@@ -1,12 +1,16 @@
 
 
+package utils
 import (
-	"fmt" 
 	"gorm.io/driver/postgres"
   	"gorm.io/gorm"
 )
 
-func Connect () {
-	dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local" 
+func Connect () (*gorm.DB) {
+	dsn := "postgres:root@tcp(localhost:4269)/testgo?charset=utf8mb4&parseTime=True&loc=Local" 
 	db, err  := gorm.Open(postgres.Open(dsn) , &gorm.Config{}) 
+	if err != nil {
+		return nil
+	}
+	return db
 }
